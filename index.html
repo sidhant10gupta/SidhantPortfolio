@@ -376,12 +376,72 @@
             font-size: 0.95rem;
         }
 
+        /* Custom Cursor */
+        * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4" fill="%233498db"/><circle cx="16" cy="16" r="12" fill="none" stroke="%233498db" stroke-width="1.5" opacity="0.5"/></svg>') 16 16, auto;
+        }
+
+        a, button, .skill-box, .job-card, .client-item, .btn {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="%23667eea"/><circle cx="16" cy="16" r="12" fill="none" stroke="%23667eea" stroke-width="2"/></svg>') 16 16, pointer;
+        }
+
+        @keyframes cursorGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+        }
+
         /* Clients Section */
         .clients {
             padding: 5rem 2rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
+
+    <script>
+        // Custom cursor animation
+        const cursor = document.createElement('div');
+        cursor.className = 'cursor-dot';
+        document.body.appendChild(cursor);
+
+        const cursorCircle = document.createElement('div');
+        cursorCircle.className = 'cursor-circle';
+        document.body.appendChild(cursorCircle);
+
+        let cursorX = 0, cursorY = 0;
+        let circleX = 0, circleY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+        });
+
+        // Smooth animation for outer circle
+        setInterval(() => {
+            circleX += (cursorX - circleX) * 0.15;
+            circleY += (cursorY - circleY) * 0.15;
+
+            cursorCircle.style.left = circleX + 'px';
+            cursorCircle.style.top = circleY + 'px';
+        }, 10);
+
+        // Hover effects on interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .skill-box, .job-card, .client-item');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorCircle.style.transform = 'scale(1.5)';
+                cursor.style.opacity = '0.5';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursorCircle.style.transform = 'scale(1)';
+                cursor.style.opacity = '1';
+            });
+        });
+    </script>
 
         .clients-container {
             max-width: 1200px;
@@ -474,70 +534,360 @@
             padding: 2rem;
         }
 
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        nav.mobile-open ul {
+            display: flex !important;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+
             nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
+                gap: 0.5rem;
+                font-size: 0.85rem;
+                flex-direction: column;
+                width: 100%;
+                display: none;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                width: 100%;
+            }
+
+            nav ul a {
+                display: block;
+                padding: 0.7rem;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+            }
+
+            nav ul a:hover {
+                background: var(--accent-light);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                order: 3;
+                width: 100%;
+                text-align: right;
+            }
+
+            nav .logo {
+                order: 1;
+            }
+
+            .hero {
+                margin-top: 120px;
             }
 
             .hero-content {
                 grid-template-columns: 1fr;
+                padding: 1rem;
             }
 
             .hero-text h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-text p {
+                font-size: 0.95rem;
             }
 
             .profile-circle {
-                width: 250px;
-                height: 250px;
+                width: 220px;
+                height: 220px;
+                margin: 1rem auto;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .about {
+                padding: 3rem 1.5rem;
+            }
+
+            .about-content {
+                padding: 1.5rem;
+            }
+
+            .about-text {
+                font-size: 1rem;
+            }
+
+            .experience {
+                padding: 3rem 1.5rem;
+            }
+
+            .job-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+                border-left: 4px solid var(--accent-color);
             }
 
             .job-header {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 0.8rem;
+            }
+
+            .job-title {
+                font-size: 1.1rem;
+            }
+
+            .job-description {
+                font-size: 0.95rem;
             }
 
             .cta-buttons {
                 flex-direction: column;
+                gap: 0.8rem;
             }
 
             .btn {
                 width: 100%;
                 text-align: center;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .skills {
+                padding: 3rem 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .skill-box {
+                padding: 1.5rem;
+            }
+
+            .skill-icon {
+                font-size: 2.5rem;
+            }
+
+            .skill-box h3 {
+                font-size: 1.1rem;
+            }
+
+            .clients {
+                padding: 3rem 1.5rem;
+            }
+
+            .clients-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .client-item {
+                padding: 1.5rem;
+            }
+
+            .contact {
+                padding: 3rem 1.5rem;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .contact-item {
+                padding: 1.5rem;
+            }
+
+            .linkedin-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+                margin-top: 1rem;
             }
         }
 
         @media (max-width: 480px) {
             nav {
-                flex-direction: column;
-                gap: 1rem;
+                padding: 0.8rem;
             }
 
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
+            nav .logo {
+                font-size: 1.2rem;
+            }
+
+            .hero {
+                margin-top: 140px;
+                padding: 1rem;
             }
 
             .hero-text h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero-text p {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
             }
 
             .profile-circle {
-                width: 200px;
-                height: 200px;
+                width: 180px;
+                height: 180px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .about {
+                padding: 2rem 1rem;
+            }
+
+            .about-content {
+                padding: 1.2rem;
+            }
+
+            .about-text {
+                font-size: 0.9rem;
+                line-height: 1.6;
+                margin-bottom: 1.2rem;
+            }
+
+            .experience {
+                padding: 2rem 1rem;
+            }
+
+            .job-card {
+                padding: 1.2rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .job-title {
+                font-size: 1rem;
+            }
+
+            .job-period {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .job-company {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .job-description li {
+                font-size: 0.9rem;
+                padding: 0.4rem 0;
+            }
+
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .skills {
+                padding: 2rem 1rem;
+            }
+
+            .skills-grid {
+                gap: 1.2rem;
+            }
+
+            .skill-box {
+                padding: 1.2rem;
+            }
+
+            .skill-icon {
+                font-size: 2rem;
+            }
+
+            .skill-box h3 {
+                font-size: 1rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .skill-box p {
+                font-size: 0.85rem;
+            }
+
+            .clients {
+                padding: 2rem 1rem;
+            }
+
+            .clients-grid {
+                gap: 1.2rem;
+            }
+
+            .client-item {
+                padding: 1.2rem;
+            }
+
+            .client-item p {
+                font-size: 0.95rem;
+            }
+
+            .contact {
+                padding: 2rem 1rem;
+            }
+
+            .contact h2 {
+                font-size: 1.8rem;
+            }
+
+            .contact-info {
+                gap: 1.2rem;
+            }
+
+            .contact-item {
+                padding: 1.2rem;
+            }
+
+            .contact-item a {
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 1.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .linkedin-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="logo">SG</div>
         <ul>
             <li><a href="#about">About</a></li>
@@ -547,6 +897,7 @@
             <li><a href="#contact">Contact</a></li>
             <li><a href="https://www.linkedin.com/in/sidhant-gupta-7816021a6/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BLPXyuJe8R6CIAVPOq6dZ2w%3D%3D" class="linkedin-btn" target="_blank">🔗 LinkedIn</a></li>
         </ul>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
     </nav>
 
     <!-- Hero Section -->
@@ -725,5 +1076,19 @@
     <footer>
         <p>&copy; 2025 Sidhant Gupta. All rights reserved. | Designed with ❤️ for career excellence</p>
     </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('mobile-open');
+        }
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navbar').classList.remove('mobile-open');
+            });
+        });
+    </script>
 </body>
 </html>
