@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidhant Gupta - Sr. Associate | Recruitment & Business Operations</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --accent-light: #e8f4f8;
+            --text-color: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-color: #ecf0f1;
+            --success-color: #27ae60;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .hero-text p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .profile-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 1rem auto 0;
+        }
+
+        .about-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .experience-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .job-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .job-period {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .job-company {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .job-description {
+            color: var(--text-color);
+            list-style: none;
+        }
+
+        .job-description li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .job-description li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .skill-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .skill-box p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Clients Section */
+        .clients {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .clients-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .clients .section-title {
+            color: white;
+        }
+
+        .clients .section-title::after {
+            background: white;
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .client-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .client-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .client-item p {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-item a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #764ba2;
+        }
+
+        .contact-item p {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .profile-circle {
+                width: 250px;
+                height: 250px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .profile-circle {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">SG</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#clients">Clients</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Sidhant Gupta</h1>
+                <p class="subtitle">Sr. Associate | Recruitment & Business Operations</p>
+                <p>Results-driven professional with 3+ years of experience in driving business growth, managing high-impact recruitment cycles, and leading cross-functional teams to deliver exceptional results.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="mailto:iamsidhantgupta10@gmail.com" class="btn btn-secondary">Email Me</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-circle">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/5ba1ec0a-7166-410b-b234-d18c6e3e97b6" alt="Sidhant Gupta">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p class="about-text">
+                I am a results-driven professional with a proven track record of delivering exceptional outcomes across recruitment, customer success, and business operations. With 3+ years of hands-on experience, I specialize in managing end-to-end hiring cycles, driving business growth, and leading teams to exceed targets.
+            </p>
+            <p class="about-text">
+                My expertise spans problem-solving, team management, full-cycle recruitment, HRMS platforms (ICIMS, Darwinbox), advanced Excel analytics, and Power BI insights. I've successfully managed key client accounts, scaled operations across multiple cities, and consistently achieved high customer satisfaction metrics.
+            </p>
+            <p class="about-text">
+                <strong style="color: var(--accent-color);">Key Achievements:</strong> 80% Offer Acceptance Rate, 25% increase in repeat business, 30% improvement in team productivity, Employee of the Quarter award.
+            </p>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="experience-container">
+            <h2 class="section-title">Professional Experience</h2>
+
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Sr. Recruiter / Client Coordinator</div>
+                        <div class="job-company">Peoplexseed</div>
+                    </div>
+                    <span class="job-period">Aug 2023 – Present</span>
+                </div>
+                <ul class="job-description">
+                    <li>Managed full recruitment lifecycle (sourcing → screening → interviews → offer → onboarding) across 20+ mid-to-senior mandates</li>
+                    <li>Managed 5–7 key client accounts, ensuring 100% alignment and driving 25% increase in repeat business</li>
+                    <li>Mentored 3–5 junior recruiters, improving team productivity by 30% through process optimization</li>
+                    <li>Achieved 80% Offer Acceptance Rate and 8:10 Screen-to-Select Ratio</li>
+                    <li>Identified and converted 10+ new client opportunities through structured lead generation</li>
+                </ul>
+            </div>
+
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Customer Service Associate / Sales Executive</div>
+                        <div class="job-company">CanX Immigration</div>
+                    </div>
+                    <span class="job-period">Feb 2023 – July 2023</span>
+                </div>
+                <ul class="job-description">
+                    <li>Advised 200+ clients on Canadian immigration and visa pathways</li>
+                    <li>Delivered high-impact sales consultations with 30–40% lead-to-conversion rate</li>
+                    <li>Provided profile-based assessments and customized eligibility solutions</li>
+                </ul>
+            </div>
+
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Business Development Associate</div>
+                        <div class="job-company">Urban Company (Contract - Quess)</div>
+                    </div>
+                    <span class="job-period">Jun 2021 – Nov 2021</span>
+                </div>
+                <ul class="job-description">
+                    <li>Launched business operations in Jabalpur region with full service framework</li>
+                    <li>Onboarded 100+ service providers across multiple locations</li>
+                    <li>Managed multi-city operations (Jabalpur, Kota, Dehradun, Vadodara, Surat)</li>
+                    <li>Improved turnaround time by 20–25% and maintained NPS score above 85%</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">Core Competencies</h2>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <div class="skill-icon">🎯</div>
+                <h3>Problem Solving</h3>
+                <p>Strategic thinking and analytical approach to complex business challenges</p>
+            </div>
+            <div class="skill-box">
+                <div class="skill-icon">👥</div>
+                <h3>Team Management</h3>
+                <p>Leading cross-functional teams and mentoring high-performing professionals</p>
+            </div>
+            <div class="skill-box">
+                <div class="skill-icon">💼</div>
+                <h3>Full-Cycle Recruitment</h3>
+                <p>End-to-end hiring process from sourcing to onboarding with 80% offer acceptance rate</p>
+            </div>
+            <div class="skill-box">
+                <div class="skill-icon">📊</div>
+                <h3>Advanced Excel</h3>
+                <p>Data analysis, pivot tables, and complex formulas for business intelligence</p>
+            </div>
+            <div class="skill-box">
+                <div class="skill-icon">📈</div>
+                <h3>Power BI</h3>
+                <p>Dashboard creation and data visualization for strategic insights</p>
+            </div>
+            <div class="skill-box">
+                <div class="skill-icon">🖥️</div>
+                <h3>HRMS Platforms</h3>
+                <p>Proficiency in ICIMS, Darwinbox and other recruitment management systems</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients" id="clients">
+        <div class="clients-container">
+            <h2 class="section-title">Clients Supported</h2>
+            <div class="clients-grid">
+                <div class="client-item">
+                    <p>Annalect (Omnicom Media Group)</p>
+                </div>
+                <div class="client-item">
+                    <p>GroupM (WPP Media)</p>
+                </div>
+                <div class="client-item">
+                    <p>IBM</p>
+                </div>
+                <div class="client-item">
+                    <p>Netweb Technologies</p>
+                </div>
+                <div class="client-item">
+                    <p>Dr Shroff Charity Eye Hospital</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <p><strong>📞 Phone</strong></p>
+                <a href="tel:+916260658479">+91-6260658479</a>
+            </div>
+            <div class="contact-item">
+                <p><strong>📧 Email</strong></p>
+                <a href="mailto:iamsidhantgupta10@gmail.com">iamsidhantgupta10@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <p><strong>🎓 Education</strong></p>
+                <p style="color: var(--text-color);">Bachelor's in Business Administration<br><small>Finance Specialization | SAC-Jabalpur (2020)</small></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Sidhant Gupta. All rights reserved. | Designed with ❤️ for career excellence</p>
+    </footer>
+</body>
+</html>
