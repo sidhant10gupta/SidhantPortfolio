@@ -90,6 +90,7 @@
         .linkedin-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(10, 102, 194, 0.3);
+            color: white;
         }
 
         /* Hero Section */
@@ -106,24 +107,22 @@
             overflow: hidden;
         }
 
-        .hero::before {
+        .hero::before, .hero::after {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
+        }
+        .hero::before {
+            width: 300px;
+            height: 300px;
             top: -100px;
             right: -100px;
         }
-
         .hero::after {
-            content: '';
-            position: absolute;
             width: 200px;
             height: 200px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
             bottom: -50px;
             left: -50px;
         }
@@ -306,6 +305,7 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .job-company {
@@ -376,72 +376,12 @@
             font-size: 0.95rem;
         }
 
-        /* Custom Cursor */
-        * {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4" fill="%233498db"/><circle cx="16" cy="16" r="12" fill="none" stroke="%233498db" stroke-width="1.5" opacity="0.5"/></svg>') 16 16, auto;
-        }
-
-        a, button, .skill-box, .job-card, .client-item, .btn {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="%23667eea"/><circle cx="16" cy="16" r="12" fill="none" stroke="%23667eea" stroke-width="2"/></svg>') 16 16, pointer;
-        }
-
-        @keyframes cursorGlow {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
-            50% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
-        }
-
         /* Clients Section */
         .clients {
             padding: 5rem 2rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-
-    <script>
-        // Custom cursor animation
-        const cursor = document.createElement('div');
-        cursor.className = 'cursor-dot';
-        document.body.appendChild(cursor);
-
-        const cursorCircle = document.createElement('div');
-        cursorCircle.className = 'cursor-circle';
-        document.body.appendChild(cursorCircle);
-
-        let cursorX = 0, cursorY = 0;
-        let circleX = 0, circleY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            cursorX = e.clientX;
-            cursorY = e.clientY;
-
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-        });
-
-        // Smooth animation for outer circle
-        setInterval(() => {
-            circleX += (cursorX - circleX) * 0.15;
-            circleY += (cursorY - circleY) * 0.15;
-
-            cursorCircle.style.left = circleX + 'px';
-            cursorCircle.style.top = circleY + 'px';
-        }, 10);
-
-        // Hover effects on interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .skill-box, .job-card, .client-item');
-        
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorCircle.style.transform = 'scale(1.5)';
-                cursor.style.opacity = '0.5';
-            });
-
-            el.addEventListener('mouseleave', () => {
-                cursorCircle.style.transform = 'scale(1)';
-                cursor.style.opacity = '1';
-            });
-        });
-    </script>
 
         .clients-container {
             max-width: 1200px;
@@ -532,6 +472,55 @@
             color: white;
             text-align: center;
             padding: 2rem;
+            position: relative;
+        }
+
+        /* Custom Cursor CSS (Applies only for desktop via JS later) */
+        @media (pointer: fine) {
+            * {
+                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="4" fill="%233498db"/><circle cx="16" cy="16" r="12" fill="none" stroke="%233498db" stroke-width="1.5" opacity="0.5"/></svg>') 16 16, auto;
+            }
+            a, button, .skill-box, .job-card, .client-item, .btn, .mascot {
+                cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5" fill="%23667eea"/><circle cx="16" cy="16" r="12" fill="none" stroke="%23667eea" stroke-width="2"/></svg>') 16 16, pointer !important;
+            }
+        }
+        
+        .cursor-dot, .cursor-circle {
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            display: none; /* Hidden by default, JS will show if applicable */
+        }
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+        .cursor-circle {
+            width: 32px; height: 32px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        /* Awesome Mascot */
+        .mascot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1001;
+            animation: floatMascot 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.2));
+        }
+        .mascot:hover {
+            transform: scale(1.15) rotate(-10deg);
+        }
+        @keyframes floatMascot {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
 
         /* Mobile Menu */
@@ -540,24 +529,22 @@
             background: none;
             border: none;
             font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-color);
+            color: var(--primary-color);
         }
 
         nav.mobile-open ul {
             display: flex !important;
         }
 
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
             nav {
                 flex-wrap: wrap;
                 padding: 1rem;
             }
-
             nav ul {
                 gap: 0.5rem;
-                font-size: 0.85rem;
+                font-size: 0.9rem;
                 flex-direction: column;
                 width: 100%;
                 display: none;
@@ -565,322 +552,76 @@
                 padding: 1rem;
                 border-radius: 10px;
                 margin-top: 1rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             }
-
             nav ul li {
                 width: 100%;
+                text-align: center;
             }
-
             nav ul a {
                 display: block;
                 padding: 0.7rem;
                 border-radius: 5px;
-                transition: all 0.3s ease;
             }
-
             nav ul a:hover {
                 background: var(--accent-light);
             }
-
             .mobile-menu-btn {
                 display: block;
                 order: 3;
-                width: 100%;
-                text-align: right;
             }
-
             nav .logo {
                 order: 1;
             }
-
             .hero {
-                margin-top: 120px;
+                margin-top: 60px;
+                padding-top: 3rem;
             }
-
             .hero-content {
                 grid-template-columns: 1fr;
-                padding: 1rem;
+                text-align: center;
             }
-
             .hero-text h1 {
-                font-size: 2.2rem;
-                margin-bottom: 0.5rem;
+                font-size: 2.5rem;
             }
-
-            .hero-text .subtitle {
-                font-size: 1.1rem;
-                margin-bottom: 1rem;
+            .cta-buttons {
+                justify-content: center;
             }
-
-            .hero-text p {
-                font-size: 0.95rem;
-            }
-
-            .profile-circle {
-                width: 220px;
-                height: 220px;
-                margin: 1rem auto;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 2rem;
-            }
-
-            .about {
-                padding: 3rem 1.5rem;
-            }
-
-            .about-content {
-                padding: 1.5rem;
-            }
-
-            .about-text {
-                font-size: 1rem;
-            }
-
-            .experience {
-                padding: 3rem 1.5rem;
-            }
-
-            .job-card {
-                padding: 1.5rem;
-                margin-bottom: 1.5rem;
-                border-left: 4px solid var(--accent-color);
-            }
-
             .job-header {
                 flex-direction: column;
                 gap: 0.8rem;
             }
-
-            .job-title {
-                font-size: 1.1rem;
+            .job-period {
+                align-self: flex-start;
             }
-
-            .job-description {
-                font-size: 0.95rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-                padding: 0.8rem 1.5rem;
-            }
-
-            .skills {
-                padding: 3rem 1.5rem;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .skill-box {
-                padding: 1.5rem;
-            }
-
-            .skill-icon {
-                font-size: 2.5rem;
-            }
-
-            .skill-box h3 {
-                font-size: 1.1rem;
-            }
-
-            .clients {
-                padding: 3rem 1.5rem;
-            }
-
-            .clients-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .client-item {
-                padding: 1.5rem;
-            }
-
-            .contact {
-                padding: 3rem 1.5rem;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .contact-item {
-                padding: 1.5rem;
-            }
-
-            .linkedin-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
-                margin-top: 1rem;
+            .mascot {
+                width: 60px;
+                bottom: 20px;
+                right: 20px;
             }
         }
 
         @media (max-width: 480px) {
-            nav {
-                padding: 0.8rem;
-            }
-
-            nav .logo {
-                font-size: 1.2rem;
-            }
-
-            .hero {
-                margin-top: 140px;
-                padding: 1rem;
-            }
-
             .hero-text h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero-text .subtitle {
-                font-size: 1rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .hero-text p {
-                font-size: 0.9rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .profile-circle {
-                width: 180px;
-                height: 180px;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .about {
-                padding: 2rem 1rem;
-            }
-
-            .about-content {
-                padding: 1.2rem;
-            }
-
-            .about-text {
-                font-size: 0.9rem;
-                line-height: 1.6;
-                margin-bottom: 1.2rem;
-            }
-
-            .experience {
-                padding: 2rem 1rem;
-            }
-
-            .job-card {
-                padding: 1.2rem;
-                margin-bottom: 1.2rem;
-            }
-
-            .job-title {
-                font-size: 1rem;
-            }
-
-            .job-period {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .job-company {
-                font-size: 0.9rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .job-description li {
-                font-size: 0.9rem;
-                padding: 0.4rem 0;
-            }
-
-            .btn {
-                padding: 0.7rem 1.2rem;
-                font-size: 0.9rem;
-            }
-
-            .skills {
-                padding: 2rem 1rem;
-            }
-
-            .skills-grid {
-                gap: 1.2rem;
-            }
-
-            .skill-box {
-                padding: 1.2rem;
-            }
-
-            .skill-icon {
                 font-size: 2rem;
             }
-
-            .skill-box h3 {
-                font-size: 1rem;
-                margin-bottom: 0.3rem;
+            .profile-circle {
+                width: 220px;
+                height: 220px;
             }
-
-            .skill-box p {
-                font-size: 0.85rem;
+            .section-title {
+                font-size: 2rem;
             }
-
-            .clients {
-                padding: 2rem 1rem;
+            .about, .experience, .skills, .clients, .contact {
+                padding: 3rem 1.5rem;
             }
-
-            .clients-grid {
-                gap: 1.2rem;
-            }
-
-            .client-item {
-                padding: 1.2rem;
-            }
-
-            .client-item p {
-                font-size: 0.95rem;
-            }
-
-            .contact {
-                padding: 2rem 1rem;
-            }
-
-            .contact h2 {
-                font-size: 1.8rem;
-            }
-
-            .contact-info {
-                gap: 1.2rem;
-            }
-
-            .contact-item {
-                padding: 1.2rem;
-            }
-
-            .contact-item a {
-                font-size: 0.95rem;
-            }
-
-            footer {
-                padding: 1.5rem 1rem;
-                font-size: 0.85rem;
-            }
-
-            .linkedin-btn {
-                padding: 0.5rem 0.8rem;
+            .job-period {
                 font-size: 0.8rem;
+            }
+            .mascot {
+                width: 50px;
+                bottom: 15px;
+                right: 15px;
             }
         }
     </style>
@@ -889,15 +630,15 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="logo">SG</div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#clients">Clients</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="https://www.linkedin.com/in/sidhant-gupta-7816021a6/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BLPXyuJe8R6CIAVPOq6dZ2w%3D%3D" class="linkedin-btn" target="_blank">🔗 LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/in/sidhant-gupta-7816021a6/" class="linkedin-btn" target="_blank">🔗 LinkedIn</a></li>
         </ul>
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
     </nav>
 
     <!-- Hero Section -->
@@ -914,9 +655,9 @@
             </div>
             <div class="hero-image">
                 <div class="profile-circle">
-                    <img src="WhatsApp Image 2025-11-17 at 13.13.48.jpeg" alt="Sidhant Gupta">
+                    <img src="WhatsApp Image 2025-11-17 at 13.13.48.jpeg" alt="Sidhant Gupta" onerror="this.src='https://via.placeholder.com/300'">
                 </div>
-                <a href="https://www.linkedin.com/in/sidhant-gupta-7816021a6/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BLPXyuJe8R6CIAVPOq6dZ2w%3D%3D" class="linkedin-btn" style="margin-top: 1.5rem;" target="_blank">🔗 Visit LinkedIn Profile</a>
+                <a href="https://www.linkedin.com/in/sidhant-gupta-7816021a6/" class="linkedin-btn" style="margin-top: 1.5rem;" target="_blank">🔗 Visit LinkedIn Profile</a>
             </div>
         </div>
     </section>
@@ -1050,7 +791,7 @@
                     <p>Dr Shroff Charity Eye Hospital</p>
                 </div>
                 <div class="client-item">
-                    <p> Marsh McLennan (MMC) </p>
+                    <p>Marsh McLennan (MMC)</p>
                 </div>
             </div>
         </div>
@@ -1077,10 +818,31 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Sidhant Gupta. All rights reserved. | Designed with ❤️ for career excellence</p>
+        <p>&copy; 2026 Sidhant Gupta. All rights reserved. | Designed with ❤️ for career excellence</p>
     </footer>
 
+    <!-- Mascot (SVG Robot) -->
+    <div class="mascot" id="mascotBtn" title="Hi, I'm your coding mascot! Click me to go to the top!">
+        <!-- A simple, cute SVG robot design -->
+        <svg viewBox="0 0 100 100" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+            <!-- Antenna -->
+            <line x1="50" y1="20" x2="50" y2="5" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="50" cy="5" r="5" fill="#f1c40f"/>
+            <!-- Head Box -->
+            <rect x="20" y="25" width="60" height="50" rx="15" fill="#ffffff" stroke="#3498db" stroke-width="5"/>
+            <!-- Eyes -->
+            <circle cx="35" cy="45" r="6" fill="#2c3e50"/>
+            <circle cx="65" cy="45" r="6" fill="#2c3e50"/>
+            <!-- Smile -->
+            <path d="M 35 60 Q 50 70 65 60" fill="transparent" stroke="#2c3e50" stroke-width="4" stroke-linecap="round"/>
+            <!-- Waving Hand -->
+            <path d="M 80 50 Q 95 30 85 20" fill="transparent" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <!-- All JavaScript -->
     <script>
+        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const navbar = document.getElementById('navbar');
             navbar.classList.toggle('mobile-open');
@@ -1092,6 +854,63 @@
                 document.getElementById('navbar').classList.remove('mobile-open');
             });
         });
+
+        // Mascot Click to Scroll Top
+        document.getElementById('mascotBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Custom Cursor Logic (Only active for pointer/mouse devices)
+        if (window.matchMedia("(pointer: fine)").matches) {
+            const cursor = document.createElement('div');
+            cursor.className = 'cursor-dot';
+            document.body.appendChild(cursor);
+
+            const cursorCircle = document.createElement('div');
+            cursorCircle.className = 'cursor-circle';
+            document.body.appendChild(cursorCircle);
+
+            // Make cursors visible since we verified it's a mouse device
+            cursor.style.display = 'block';
+            cursorCircle.style.display = 'block';
+
+            let cursorX = 0, cursorY = 0;
+            let circleX = 0, circleY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+            });
+
+            // Smooth animation for outer circle
+            setInterval(() => {
+                circleX += (cursorX - circleX) * 0.15;
+                circleY += (cursorY - circleY) * 0.15;
+                cursorCircle.style.left = circleX + 'px';
+                cursorCircle.style.top = circleY + 'px';
+            }, 10);
+
+            // Hover effects on interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .skill-box, .job-card, .client-item, .mascot');
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorCircle.style.width = '50px';
+                    cursorCircle.style.height = '50px';
+                    cursorCircle.style.borderColor = '#667eea';
+                    cursor.style.opacity = '0.5';
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    cursorCircle.style.width = '32px';
+                    cursorCircle.style.height = '32px';
+                    cursorCircle.style.borderColor = 'var(--accent-color)';
+                    cursor.style.opacity = '1';
+                });
+            });
+        }
     </script>
 </body>
 </html>
